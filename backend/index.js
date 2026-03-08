@@ -1,6 +1,8 @@
 import express from "express";
 import fetch from "node-fetch";
 import cors from 'cors'
+import dotenv from 'dotenv';
+dotenv.config();
 const app = express();
 app.use(express.json({ limit: "10mb" }));
 app.use(express.urlencoded({ limit: "10mb", extended: true }));
@@ -14,7 +16,7 @@ app.post("/api/recognize", async (req, res) => {
   try {
     console.log("Inside api");
     const response = await fetch(
-      "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=" + "AIzaSyDGhTE6_7me2Fs_X4SkSjaLnMUTGQROuF8",
+      "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=" +process.env.API_KEY,
       {
         method: "POST",
         headers: { "Content-Type": "application/json" },
